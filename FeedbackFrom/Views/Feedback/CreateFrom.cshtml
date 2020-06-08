@@ -1,0 +1,160 @@
+﻿@model FeedbackFrom.Models.FeedbackModels
+
+@{
+    /**/
+
+    /**/
+
+    /**/
+
+    /**/
+
+    /**/
+
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Styles.Render("~/Content/feedbackcreate")
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("CreateFrom", "Feedback", FormMethod.Post, new { role = "form", autocomplete = "off", enctype = "multipart/form-data", id = "landAdd" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(m => m.FeedbackName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.FeedbackName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.FeedbackName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <hr />
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(m => m.FeedbackDescription, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.FeedbackDescription, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.FeedbackDescription, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <hr />
+    <hr />
+    @*<div class="form-group">
+            @Html.LabelFor(m => m.StartDate, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control datepicker", @type = "date" })
+                @Html.ValidationMessageFor(m => m.StartDate, "", new { @class = "text-danger" })
+
+            </div>
+        </div>*@
+
+
+    @*<div class="form-group">
+        <label for="StartDate" title="Start Date">Start Date</label>
+        <div class="col-md-10">
+            <div class="input-group date" data-provide="datepicker">
+                <input value="@Model.StartDate" class="form-control" data-val-date="The field must be a date" id="StartDate" name="StartDate" type="text" autocomplete="off" required>
+                <div class="input-group-addon">
+                    <span class="glyphicon glyphicon-th"></span>
+                </div>
+            </div>
+        </div>
+    </div>*@
+    <hr />
+    <hr />
+    @*<div class="form-group">
+            @Html.LabelFor(m => m.EndDate, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control datepicker", @type = "date" })
+                @Html.ValidationMessageFor(m => m.EndDate, "", new { @class = "text-danger" })
+
+            </div>
+        </div>*@
+    @*<div class="col-sm-3">
+        <div class="form-group">
+            <label for="StartDate" title="Start Date">End Date</label>
+            <div class="col-md-10">
+                <div class="input-group date" data-provide="datepicker">
+                    <input value="@Model.EndDate" class="form-control" data-val-date="The field must be a date" id="EndDate" name="EndDate" type="text" autocomplete="off" required>
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+    <hr />
+    <hr />
+
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="StartDate" title="Next Date of Hearing">Start Date</label>
+
+                <div class="input-group date" data-provide="datepicker">
+                    <input value="" class="form-control " data-val-date="The field must be a date" id="StartDate" name="StartDate" type="text">
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="EndDate" title="Next Date of Hearing">EndDate</label>
+
+                <div class="input-group date" data-provide="datepicker">
+                    <input value="" class="form-control " id="EndDate" name="EndDate" type="text" >
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Departmentid, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Departmentid, new SelectList(Model.Departments, "DepartmentId", "DepartmentName"), new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Departmentid, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <hr />
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(m => m.QuestionIds, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @foreach (var item in Model.Questions)
+            {
+                <input class="checkbox-inline" type="checkbox" name="QuestionIds[]" value="@item.QuestionId" /> @item.QuestionText
+                <hr />
+            }
+        </div>
+    </div>
+    <hr />
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(m => m.CheckBoxNo, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.CheckBoxNo, new { @class = "form-control", @type = "number" })
+            @Html.ValidationMessageFor(m => m.Departmentid, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Range, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            <input type="range" min="1" max="100" value="50" class="slider" id="myRange" name="Range">
+            <div>Range:<span id="rangevalueshower">20</span></div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/appjs/createform")
+}
